@@ -1,8 +1,10 @@
 from PyQt5.QtWidgets import QMainWindow, QFileDialog
 from PyQt5 import QtCore
+from PyQt5.QtGui import QPixmap
 
-from gui import Ui_ImageViewer # This file holds our MainWindow and all design related things
-              # it also keeps events etc that we defined in Qt Designer
+from gui import Ui_ImageViewer
+from api import detectSeeds, classifySeeds
+from utils import Image
 
 
 class ImageHandlerApp(QMainWindow, Ui_ImageViewer):
@@ -13,29 +15,37 @@ class ImageHandlerApp(QMainWindow, Ui_ImageViewer):
         # access variables, methods etc in the design.py file
         super(self.__class__, self).__init__()
         self.setupUi(self)  # This is defined in design.py file automatically
-                            # It sets up layout and widgets that are defined
-        # self.actionopen_image.
-        
-        self.actionOpen_Images.triggered["bool"].connect(self.openImages)
-        self.actionOpen_Folder.triggered["bool"].connect(self.openFolder)
 
-        self.list_of_images=[]
+        self.actionOpen_Image.triggered["bool"].connect(self.openImage)
+        self.actionDetect_Seeds.triggered["bool"].connect(self.detectSeeds)
+        self.actionClassify_Seeds.triggered["bool"].connect(self.classifySeeds)
 
-    def openImages(self):
-        print("openImages")
-        _translate = QtCore.QCoreApplication.translate
+    def openImage(self, trigger=False, fileName=None):
+        if fileName is None:
+            fileName, _ = QFileDialog.getOpenFileName(self, "Open Image",
+                        "", "Image Files (*.png *.jpg *.bmp)")
+        if fileName is None or fileName is "":
+            return
 
-        fileNames, _ = QFileDialog.getOpenFileNames(self,
-            "Open Images", "", "Image Files (*.png *.jpg *.bmp)");
-        print(fileNames)
-        self.list_of_images = fileNames
+        self.currentImage = Image(path=fileName)
+        self.showImage(self.currentImage)
+        return
 
+    def detectSeeds(self):
+        resultimage, good_cnt = detectSeeds(self.currentImage.CV)
+        self.showImage(Image(cv_img=resultimage))
+        return
 
+    def classifySeeds(self):
+        resultimage = classifySeeds(self.currentImage.CV)
+        self.showImage(Image(cv_img=resultimage))
+        return
 
-    def openFolder(self):
-        print("openFolder")
-        folderName = QFileDialog.getExistingDirectory(self,
-            "Select directory");
-        print(folderName)
-        # QtGui.QFileDialog.getExistingDirectory(self, 'Select directory')
-
+    def showImage(self, Image):
+        pixmap01 = QPixmap.fromImage(Image.QT)
+        pixmap_image = QPixmap(pixmap01)
+        self.label.setPixmap(pixmap_image)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setScaledContents(True)
+        self.label.setMinimumSize(100, 100)
+        return

@@ -1,0 +1,68 @@
+{
+    "folders": [
+        {
+            "name": "pyQt",
+            "path": "."
+        }
+    ],
+    "settings": {
+        // editor settings
+        "window.zoomLevel": 1,
+        "breadcrumbs.enabled": true,
+        "editor.rulers": [72, 79, 119],
+        "editor.minimap.enabled": false,
+        "editor.formatOnType": true,
+        // explorer settings
+        "files.exclude": {
+            "**/.git": true,
+            "**/.ipynb_checkpoints": true,
+            "**/__pycache__": true,
+            "**/.DS_Store": false,
+            "**/.hg": false,
+            "**/.svn": false,
+            "**/CVS": false
+        },
+        "files.watcherExclude": {
+            "**/exps/**": true,
+            "**/models/**": true
+        },
+        // python settings
+        "python.pythonPath": "/Users/giancos/anaconda/envs/pyQt/bin/python",
+        "python.linting.pep8Enabled": true,
+		"python.linting.pylintEnabled": false,
+		"python.linting.flake8Enabled": true,
+		"python.linting.flake8Args": ["--ignore=E128"],
+
+        "python.linting.pep8Args": [
+            "--ignore=E128"
+        ],
+        "python.linting.pylintArgs": [
+            "--disable=C0111,C0103,C0411,C1801,R0913",
+            "--generated-members=torch.**, argparse.Namespace.**",
+            "--ignored-modules=torch"
+        ],
+        
+        // debugger settings
+        "launch": {
+            "version": "0.2.0",
+            "configurations": [
+                {
+                    "name": "Python: Full Debug",
+                    "type": "python",
+                    "request": "launch",
+                    "program": "${file}",
+                    "console": "integratedTerminal",
+                    "debugStdLib": true
+                },
+                {
+                    "name": "Python: Current File",
+                    "type": "python",
+                    "request": "launch",
+                    "program": "${file}",
+                    "console": "integratedTerminal",
+                    "debugStdLib": false
+                }
+            ]
+        },
+    }
+}

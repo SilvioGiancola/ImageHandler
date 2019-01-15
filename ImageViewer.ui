@@ -2,21 +2,17 @@
 <ui version="4.0">
  <class>ImageViewer</class>
  <widget class="QMainWindow" name="ImageViewer">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>888</width>
-    <height>655</height>
-   </rect>
-  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>ImageViewer</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QWidget" name="widget" native="true"/>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Image</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -25,18 +21,25 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>888</width>
-     <height>20</height>
+     <width>603</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionOpen_Images"/>
-    <addaction name="actionOpen_Folder"/>
+    <addaction name="actionOpen_Image"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionDetect_Seeds"/>
+    <addaction name="actionClassify_Seeds"/>
    </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -49,20 +52,26 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionOpen_Images"/>
-   <addaction name="actionOpen_Folder"/>
+   <addaction name="actionOpen_Image"/>
+   <addaction name="actionDetect_Seeds"/>
+   <addaction name="actionClassify_Seeds"/>
   </widget>
-  <action name="actionOpen_Images">
+  <action name="actionOpen_Image">
    <property name="text">
-    <string>Open Images</string>
+    <string>Open Image</string>
    </property>
    <property name="toolTip">
-    <string>Open Images</string>
+    <string>Open Image</string>
    </property>
   </action>
-  <action name="actionOpen_Folder">
+  <action name="actionDetect_Seeds">
    <property name="text">
-    <string>Open Folder</string>
+    <string>Detect Seeds</string>
+   </property>
+  </action>
+  <action name="actionClassify_Seeds">
+   <property name="text">
+    <string>Classify Seeds</string>
    </property>
   </action>
  </widget>
