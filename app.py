@@ -8,12 +8,13 @@ from utils import Image
 
 
 class ImageHandlerApp(QMainWindow, Ui_ImageViewer):
+
     def __init__(self):
         # Explaining super is out of the scope of this article
         # So please google it if you're not familar with it
         # Simple reason why we use it here is that it allows us to
         # access variables, methods etc in the design.py file
-        super(self.__class__, self).__init__()
+        super().__init__()
         self.setupUi(self)  # This is defined in design.py file automatically
 
         self.actionOpen_Image.triggered["bool"].connect(self.openImage)
@@ -22,8 +23,8 @@ class ImageHandlerApp(QMainWindow, Ui_ImageViewer):
 
     def openImage(self, trigger=False, fileName=None):
         if fileName is None:
-            fileName, _ = QFileDialog.getOpenFileName(self, "Open Image",
-                        "", "Image Files (*.png *.jpg *.bmp)")
+            fileName, _ = QFileDialog.getOpenFileName(
+                self, "Open Image", "", "Image Files (*.png *.jpg *.bmp)")
         if fileName is None or fileName is "":
             return
 
