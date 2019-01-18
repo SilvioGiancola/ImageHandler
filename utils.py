@@ -1,14 +1,19 @@
 import cv2
 from PyQt5.QtGui import QImage
+from PyQt5.QtGui import QStandardItemModel, QStandardItem
 
 
-class Image():
+class Image(QStandardItem):
     def __init__(self, path=None, cv_img=None):
+        super().__init__()
+
         self.path = path
         if path is not None:
             self._openFile(path)
         if cv_img is not None:
             self._img_cv = cv_img
+
+        self.setText(path)
 
     def _openFile(self, path):
         if type(path) is str:
