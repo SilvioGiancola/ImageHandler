@@ -8,7 +8,10 @@ from PyQt5.QtGui import QStandardItemModel
 from gui import Ui_ImageViewer
 from api import detectSeeds, classifySeeds
 from utils import Image
+from utils import Logger
 import os
+
+
 
 
 class ImageHandlerApp(QMainWindow, Ui_ImageViewer):
@@ -21,20 +24,20 @@ class ImageHandlerApp(QMainWindow, Ui_ImageViewer):
         super().__init__()
         self.setupUi(self)  # This is defined in design.py file automatically
 
+        self.log = Logger()
+        self.log.linkTextBrowser(self.textBrowser_Logging)
         self.model = QStandardItemModel(self.listView_listImages)
-        self.listView_listImages.doubleClicked.connect(self.on_item_changed)
-
         self.currentImage = None
 
+
+
+        self.listView_listImages.doubleClicked.connect(self.on_item_changed)
         self.actionDetect_Seeds.triggered["bool"].connect(self.detectSeeds)
         self.actionClassify_Seeds.triggered["bool"].connect(self.classifySeeds)
-
         self.pushButton_addImages.clicked["bool"].connect(self.addImages)
-        self.pushButton_removeImage.clicked["bool"].connect(
-            self.removeCurrentImage)
+        self.pushButton_removeImage.clicked["bool"].connect(self.removeCurrentImage)
         self.pushButton_addFolder.clicked["bool"].connect(self.addFolder)
-        self.pushButton_removeAllImages.clicked["bool"].connect(
-            self.removeAllImages)
+        self.pushButton_removeAllImages.clicked["bool"].connect(self.removeAllImages)
 
     def openImage(self, trigger=False, fileName=None):
         if fileName is None:
@@ -76,7 +79,7 @@ class ImageHandlerApp(QMainWindow, Ui_ImageViewer):
         if folder is None:
             folder = QFileDialog.getExistingDirectory(
                 self, "Select Folder", "")
-        print(folder)
+        self.log.log(folder)
         valid_images = [".jpg", ".gif", ".png", ".tga"]
         for f in os.listdir(folder):
             ext = os.path.splitext(f)[1]

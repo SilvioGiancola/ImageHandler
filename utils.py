@@ -34,3 +34,17 @@ class Image(QStandardItem):
         img_qt = QImage(img_cv.data, width, height,
                         bytesPerLine, QImage.Format_RGB888)
         return img_qt
+
+
+class Logger():
+    def __int__(self, path, textBrowser_Logging):
+        print("__init__")
+        self.textBrowser = None
+
+    def linkTextBrowser(self, textBrowser):
+        self.textBrowser = textBrowser
+
+    def log(self, text):
+        if (self.textBrowser is not None):
+            self.textBrowser.append(text)
+            print(text)
