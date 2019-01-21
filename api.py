@@ -1,8 +1,10 @@
 import cv2
 import numpy as np
+import logging
 
 
 def detectSeeds(image):
+    logging.info("Detecting seeds...")
     ret, maskR = cv2.threshold(
         image[:, :, 0], 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
     ret, maskG = cv2.threshold(
@@ -36,7 +38,7 @@ def detectSeeds(image):
     # Draw contours on image
     cv2.drawContours(image, good_cnt, -1, (0, 255, 0), 3)
     # Plot results
-    print(f"{len(good_cnt)} seeds found")
+    logging.info(f"{len(good_cnt)} seeds found")
 
     return image, good_cnt
 
@@ -44,6 +46,7 @@ def detectSeeds(image):
 def classifySeeds(image):
     _, good_cnt = detectSeeds(image)
 
+    logging.info(f"Classifying seeds...")
     cv2.drawContours(image, good_cnt, -1, (0, 255, 0), 3)
 
     bbs = [cv2.boundingRect(cnt) for cnt in good_cnt]
@@ -52,13 +55,13 @@ def classifySeeds(image):
     geminated = 0
     for cnt in good_cnt:
         x, y, w, h = cv2.boundingRect(cnt)
-        if (w * h > min_area):
+        if w * h > min_area:
             geminated = geminated + 1
             cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 4)
         else:
             cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 4)
 
-    print(f"{len(good_cnt)} seeds found")
-    print(f"  -> {geminated} geminated (red)")
-    print(f"  -> {len(good_cnt) - geminated} non-geminated (blue)")
+    logging.info(f"{len(good_cnt)} seeds found")
+    logging.info(f"  -> {geminated} geminated (red)")
+    logging.info(f"  -> {len(good_cnt) - geminated} non-geminated (blue)")
     return image

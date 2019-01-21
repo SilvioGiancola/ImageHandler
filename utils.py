@@ -1,19 +1,22 @@
 import cv2
 from PyQt5.QtGui import QImage
-from PyQt5.QtGui import QStandardItemModel, QStandardItem
+from PyQt5.QtGui import QStandardItem
+import logging
+import os
 
 
 class Image(QStandardItem):
+
     def __init__(self, path=None, cv_img=None):
         super().__init__()
 
         self.path = path
-        if path is not None:
-            self._openFile(path)
+        if self.path is not None:
+            self.filename = os.path.basename(self.path)
+            self._openFile(self.path)
+            self.setText(self.filename)
         if cv_img is not None:
             self._img_cv = cv_img
-
-        self.setText(path)
 
     def _openFile(self, path):
         if type(path) is str:
@@ -36,15 +39,13 @@ class Image(QStandardItem):
         return img_qt
 
 
-class Logger():
-    def __int__(self, path, textBrowser_Logging):
-        print("__init__")
-        self.textBrowser = None
 
-    def linkTextBrowser(self, textBrowser):
-        self.textBrowser = textBrowser
 
-    def log(self, text):
-        if (self.textBrowser is not None):
-            self.textBrowser.append(text)
-            print(text)
+class GuiLogger(logging.Handler):
+
+    def __init__(self, edit):
+        super().__init__()
+        self.edit = edit
+
+    def emit(self, record):
+        self.edit.append(self.format(record))
