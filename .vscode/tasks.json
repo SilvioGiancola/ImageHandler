@@ -6,7 +6,7 @@
         {
             "label": "designer and run",
             "type": "shell",
-            "command": "pyuic5 ImageViewer.ui -o gui.py && python main.py",
+            "command": "source activate pyqt && pyuic5 ImageViewer.ui -o gui.py && python main.py",
             "problemMatcher": [],
             "group": {
                 "kind": "build",

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ImageViewer.ui'
 #
-# Created by: PyQt5 UI code generator 5.6
+# Created by: PyQt5 UI code generator 5.9.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -43,7 +43,6 @@ class Ui_ImageViewer(object):
         self.dockWidgetContents = QtWidgets.QWidget()
         self.dockWidgetContents.setObjectName("dockWidgetContents")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.dockWidgetContents)
-        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.pushButton_addImages = QtWidgets.QPushButton(self.dockWidgetContents)
         self.pushButton_addImages.setObjectName("pushButton_addImages")
@@ -71,7 +70,6 @@ class Ui_ImageViewer(object):
         self.dockWidgetContents_2 = QtWidgets.QWidget()
         self.dockWidgetContents_2.setObjectName("dockWidgetContents_2")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.dockWidgetContents_2)
-        self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.textBrowser_Logging = QtWidgets.QTextBrowser(self.dockWidgetContents_2)
         self.textBrowser_Logging.setObjectName("textBrowser_Logging")

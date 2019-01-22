@@ -27,7 +27,7 @@
             "**/models/**": true
         },
         // python settings
-        "python.pythonPath": "/Users/giancos/anaconda/envs/pyQt/bin/python",
+        "python.pythonPath": "/home/giancos/anaconda3/envs/pyqt/bin/python",
         "python.formatting.provider": "yapf",
         "python.formatting.yapfArgs": [
             "--style=google"
