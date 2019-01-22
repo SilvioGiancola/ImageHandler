@@ -136,7 +136,6 @@ class ImageHandlerApp(QMainWindow, Ui_ImageViewer):
 
     def removeAllImages(self, trigger=False):
         try:
-            print("removeAllImages")
             print(self.model.rowCount())
             self.model.removeRows(0, self.model.rowCount())
             self.listView_listImages.setModel(self.model)
