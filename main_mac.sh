@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 echo "Image Handler starter"
-cd ~/git/ImageHandler
+cd $( dirname "${BASH_SOURCE[0]}" )
 conda --version
 conda create -n pyqt
 source activate pyqt
