@@ -4,8 +4,8 @@ cd $( dirname "${BASH_SOURCE[0]}" )
 conda --version
 # source deactivate
 # conda remove --name pyqt --all
-conda create -n pyqt python
-source activate pyqt lxml
+conda create -n pyqt python lxml
+source activate pyqt 
 conda install -c menpo opencv
 pip install PyQt5
 echo "Run Image Handler"
