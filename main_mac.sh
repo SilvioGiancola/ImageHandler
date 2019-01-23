@@ -12,8 +12,8 @@ echo "Run Image Handler"
 python main.py
 echo "Build Image Handler"
 pip install pyinstaller
-rm -r dist
-rm -r build
-rm main.spec
+# rm -r dist
+# rm -r build
+# rm main.spec
 pyinstaller -F main.py
 ./dist/main
